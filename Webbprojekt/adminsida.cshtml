@@ -1,0 +1,46 @@
+﻿@{
+    if (IsPost)
+    {
+        // Hämta information från formuläret
+        string title = Request["title"];
+        HttpPostedFileBase uploadedFile = Request.Files["file"];
+
+        // Hämta filens namn och sedan spara den i mappen
+        string fileName = Path.GetFileName(uploadedFile.FileName);
+        string fileSavePath = Server.MapPath("~/Bildgalleri/" + fileName);
+        uploadedFile.SaveAs(fileSavePath);
+
+        // Spara bildernas sökväg och information till en csv fil
+        string path = Server.MapPath("~/bildgalleri.csv");
+        string[] existerandeBilder = File.ReadAllLines(path);
+
+        int length = existerandeBilder.Length;
+        int position = Request["position"].AsInt();
+        if (position > length)
+        {
+            length = position;
+        }
+
+        string[] bilder = new string[length];
+        existerandeBilder.CopyTo(bilder, 0);
+        bilder[position - 1] = title + ';' + fileName + ';';
+        File.WriteAllLines(path, bilder);
+    }
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <div><h1>Grattis</h1></div>
+        <form method="post" enctype="multipart/form-data" style="width: 300px">
+            <input type="number" name="position" min="1" value="1" />
+            <input type="text" name="title" required /><br />
+            <input type="file" name="file" width="48" height="48" required />
+            <input type="submit" /><br />
+            <a href="~/html/bildgalleri.cshtml"><input type="button" value="Klar" /></a>
+        </form>
+    </body>
+</html>

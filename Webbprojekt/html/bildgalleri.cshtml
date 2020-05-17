@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/bildgalleri.css">
+    <link rel="stylesheet" href="../css/Index.css">
+    <link rel="stylesheet" href="../css/cssawsome.css">
+    <script src="../js/dropdown.js"></script>
+    <title>Bildgaller</title>
+
+
+</head>
+<body>
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light desktop">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="../index2.html">Liareds Bygg</a>
+
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav navbar-center">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index2.html">Hem <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.merinfo.se/foretag/Liareds-Bygg---Jan-Olof-Johansson-Aktiebolag-5563461796/2k0calg-czeo">Om oss</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="bildgalleri.cshtml">Bildgalleri</a>
+            </ul>
+        </div>
+    </nav>
+    <div class="dropdown mobilenav">
+        <button onclick="myFunction()" class="dropbtn">Meny <i class="fas fa-2x fa-sort-down"></i></button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="../index2.html">Hem</a>
+            <a href="https://www.merinfo.se/foretag/Liareds-Bygg---Jan-Olof-Johansson-Aktiebolag-5563461796/2k0calg-czeo">Om Oss</a>
+            <a href="bildgalleri.cshtml">Bildgalleri</a>
+        </div>
+        <a class="navbar-brand mobilecenter" href="../index2.html">Liareds Bygg</a>
+
+    </div>
+
+
+    <div class="slideshow-container">
+
+        @{
+            string path = Server.MapPath("~/bildgalleri.csv");
+            string[] existerandeBilder = File.ReadAllLines(path);
+
+            for (int i = 0; i < existerandeBilder.Length; i++)
+            { 
+                string bild = existerandeBilder[i];
+                string[] kolumner = bild.Split(';');
+
+                <div class="mySlides fade-in">
+                    <div class="numbertext">@(i+1) / @existerandeBilder.Length</div>
+                    <img src="../Bildgalleri/@kolumner[1]" style="width:100%">
+                    <div class="text">@kolumner[0]</div>
+                </div>
+
+            }
+        }
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    </div>
+    <br>
+
+
+    <div class="slidedesktop">
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="Anlita.html"><i class="fas fa-5x fa-hammer"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="Anlita.html"><h4>Anlita oss</h4></a></span>
+            </span>
+        </div>
+
+
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="bildgalleri.cshtml"><i class="fas fa-5x fa-images"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="bildgalleri.cshtml"><h4>Tidigare jobb</h4></a></span>
+            </span>
+        </div>
+
+        
+
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="~/login.cshtml"><i class="fas fa-5x fa-user"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="~/login.cshtml"><h4>Logga in</h4></a></span>
+            </span>
+        </div>
+    </div>
+
+    <!-- Här kommer den responsiva delen av slide(Surfplatta)-->
+    <div class="slideplatta">
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="Anlita.html"><i class="fas fa-2x fa-hammer"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="Anlita.html"><h4>Anlita oss</h4></a></span>
+            </span>
+        </div>
+
+
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="bildgalleri.cshtml"><i class="fas fa-2x fa-images"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="bildgalleri.cshtml"><h4>Tidigare jobb</h4></a></span>
+            </span>
+        </div>
+
+       
+
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="~/login.cshtml"><i class="fas fa-2x fa-user"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="~/login.cshtml"><h4>Logga in</h4></a></span>
+            </span>
+        </div>
+    </div>
+    <!-- Här kommer den responsiva delen av slide(Mobil)-->
+    <div class="slidemobil">
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="Anlita.html"><i class="fas fa-2x fa-hammer"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="Anlita.html"><h4>Anlita oss</h4></a></span>
+            </span>
+        </div>
+
+
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="bildgalleri.cshtml"><i class="fas fa-2x fa-images"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="bildgalleri.cshtml"><h4>Tidigare jobb</h4></a></span>
+            </span>
+        </div>
+
+        
+
+        <div class="icon">
+            <span class="fa-layers fa-fw" style="background:transparent">
+                <a class="icona" href="~/login.cshtml"><i class="fas fa-2x fa-user"></i></a>
+                <span class="fa-layers-text fa-inverse" data-fa-transform="shrink-8 down-3" style="font-weight:900"><a class="icona" href="~/login.cshtml"><h4>Logga in</h4></a></span>
+            </span>
+        </div>
+
+
+        <script src="../js/bildgalleri.js"></script>
+
+</body>
+</html>
+
